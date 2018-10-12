@@ -19,6 +19,10 @@ anntrain(Ann *ann, double *inputs, double *outputs)
 	}
 	D = ann->deltas[ann->n-2];
 	weightsinitdoubles(D, error);
+	for (i = 0; i < (ann->n-2); i++) {
+		D = ann->deltas[i];
+		weightsinitdouble(D, 1.0);
+	}
 
 	// backpropagate MSE
 	D2 = ann->deltas[ann->n-2];
