@@ -15,18 +15,16 @@ main()
 	while (error > 0.001) {
 		for (i = 0; i < 4; i++) {
 			anntrain(test, inputs[i], &outputs[i]);
-
-			if (counter++ % 1000 == 1) {
-				error = 0;
-			
-				for (j = 0; j < 4; j++) {
-					results = annrun(test, inputs[i]);
-					error += pow(results[0] - outputs[i], 2.0);
-					free(results);
-				}
-				print("error: %f\n", error);
-			}
 		}
+
+		counter++;
+		error = 0;
+		for (j = 0; j < 4; j++) {
+			results = annrun(test, inputs[j]);
+			error += pow(results[0] - outputs[j], 2.0);
+			free(results);
+		}
+		print("error: %f\n", error);
 	}
-	print("error: %f, done\n", error);
+	print("error: %f, done after %d epochs\n", error, counter);
 }
