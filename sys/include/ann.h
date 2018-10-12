@@ -45,4 +45,3 @@ Weights *weightsinitdoubles(Weights*, double*);
 Weights *weightscreate(int, int, int);
 double *annrun(Ann*, double*);
 void anntrain(Ann*, double*, double*);
-

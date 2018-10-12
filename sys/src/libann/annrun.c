@@ -16,7 +16,7 @@ annrun(Ann *ann, double *input)
 	for (l = 1; l < ann->n; l++) {
 		for (o = 0; o < ann->layers[l]->n; o++) {
 			O = ann->layers[l]->neurons[o];
-			O->sum = 0;
+			O->sum = ann->weights[l-1]->values[ann->weights[l-1]->inputs][o]; // bias
 			for (i = 0; i < ann->layers[l-1]->n; i++)
 				O->sum += ann->layers[l-1]->neurons[i]->value * ann->weights[l-1]->values[i][o];
 			O->value = O->activation(O->sum);

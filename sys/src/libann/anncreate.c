@@ -9,7 +9,7 @@ neuroninit(Neuron *in, double (*activation)(double input), double (*gradient)(do
 	in->activation = activation;
 	in->gradient = gradient;
 	in->steepness = steepness;
-	in->value = 0;
+	in->value = 1.0;
 	in->sum = 0;
 	return in;
 }
@@ -29,8 +29,8 @@ layercreate(int num_neurons, double(*activation)(double), double(*gradient)(doub
 	int i;
 
 	ret->n = num_neurons;
-	ret->neurons = calloc(num_neurons, sizeof(Neuron*));
-	for (i = 0; i < ret->n; i++) {
+	ret->neurons = calloc(num_neurons+1, sizeof(Neuron*));
+	for (i = 0; i <= ret->n; i++) {
 		ret->neurons[i] = neuroncreate(activation, gradient, 1.0);
 	}
 	return ret;
@@ -42,7 +42,7 @@ weightsinitrand(Weights *in)
 	int i, o;
 
 	srand(time(0));
-	for (i = 0; i < in->inputs; i++)
+	for (i = 0; i <= in->inputs; i++)
 		for (o = 0; o < in->outputs; o++)
 			in->values[i][o] = ((double)rand()/RAND_MAX) - 0.5;
 
@@ -54,7 +54,7 @@ weightsinitdouble(Weights *in, double init)
 {
 	int i, o;
 
-	for (i = 0; i < in->inputs; i++)
+	for (i = 0; i <= in->inputs; i++)
 		for (o = 0; o < in->outputs; o++)
 			in->values[i][o] = init;
 
@@ -68,8 +68,8 @@ weightscreate(int inputs, int outputs, int initialize)
 	Weights *ret = calloc(1, sizeof(Weights));
 	ret->inputs = inputs;
 	ret->outputs = outputs;
-	ret->values = calloc(inputs, sizeof(double*));
-	for (i = 0; i < inputs; i++)
+	ret->values = calloc(inputs+1, sizeof(double*));
+	for (i = 0; i <= inputs; i++)
 		ret->values[i] = calloc(outputs, sizeof(double));
 	if (initialize)
 		weightsinitrand(ret);
