@@ -1,0 +1,11 @@
+</$objtype/mkfile
+
+LIB=/$objtype/lib/libann.a
+
+OFILES=\
+	ann.$O\
+
+HFILES=\
+	/sys/include/ann.h\
+
+</sys/src/cmd/mksyslib
