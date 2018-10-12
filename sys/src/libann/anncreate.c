@@ -44,7 +44,7 @@ weightsinitrand(Weights *in)
 	srand(time(0));
 	for (i = 0; i <= in->inputs; i++)
 		for (o = 0; o < in->outputs; o++)
-			in->values[i][o] = ((double)rand()/RAND_MAX) - 0.5;
+			in->values[i][o] = (((double)rand()/RAND_MAX) - 0.5) * 4.0;
 
 	return in;
 }
