@@ -4,6 +4,10 @@ LIB=/$objtype/lib/libann.a
 
 OFILES=\
 	ann.$O\
+	annrun.$O\
+	anntrain.$O\
+	anncreate.$O\
+	weightsinitdoubles.$O\
 
 HFILES=\
 	/sys/include/ann.h\

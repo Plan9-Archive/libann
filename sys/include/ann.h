@@ -33,11 +33,14 @@ struct Weights {
 	double **values;
 };
 
+double activation_sigmoid(double);
+double gradient_sigmoid(double);
 Ann *anncreate(int, ...);
 Layer *layercreate(int, double(*)(double), double(*)(double));
 Neuron *neuroninit(Neuron*, double (*)(double), double (*)(double), double);
 Neuron *neuroncreate(double (*)(double), double (*)(double), double);
 Weights *weightsinitrand(Weights*);
+Weights *weightsinitdouble(Weights*, double);
 Weights *weightsinitdoubles(Weights*, double*);
 Weights *weightscreate(int, int, int);
 double *annrun(Ann*, double*);
