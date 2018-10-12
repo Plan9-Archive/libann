@@ -35,7 +35,7 @@ anntrain(Ann *ann, double *inputs, double *outputs)
 				for (n = 0; n < D2->outputs; n++)
 					sum += D2->values[o][n] * W->values[o][n];
 			}
-			for (i = 0; i < ann->layers[w]->n; i++) {
+			for (i = 0; i <= ann->layers[w]->n; i++) {
 			 	D->values[i][o] *= acc * sum;
 			}
 		}
@@ -48,7 +48,7 @@ anntrain(Ann *ann, double *inputs, double *outputs)
 		W = ann->weights[w];
 		D = ann->deltas[w];
 
-		for (i = 0; i < W->inputs; i++) {
+		for (i = 0; i <= W->inputs; i++) {
 			I = ann->layers[w]->neurons[i];
 			for (o = 0; o < W->outputs; o++) {
 				W->values[i][o] += D->values[i][o] * ann->rate * I->value;
