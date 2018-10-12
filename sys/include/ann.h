@@ -20,8 +20,8 @@ struct Layer {
 };
 
 struct Neuron {
-	double (*activation)(double input);
-	double (*gradient)(double input);
+	double (*activation)(Neuron*);
+	double (*gradient)(Neuron*);
 	double steepness;
 	double value;
 	double sum;
@@ -33,12 +33,12 @@ struct Weights {
 	double **values;
 };
 
-double activation_sigmoid(double);
-double gradient_sigmoid(double);
+double activation_sigmoid(Neuron*);
+double gradient_sigmoid(Neuron*);
 Ann *anncreate(int, ...);
-Layer *layercreate(int, double(*)(double), double(*)(double));
-Neuron *neuroninit(Neuron*, double (*)(double), double (*)(double), double);
-Neuron *neuroncreate(double (*)(double), double (*)(double), double);
+Layer *layercreate(int, double(*)(Neuron*), double(*)(Neuron*));
+Neuron *neuroninit(Neuron*, double (*)(Neuron*), double (*)(Neuron*), double);
+Neuron *neuroncreate(double (*)(Neuron*), double (*)(Neuron*), double);
 Weights *weightsinitrand(Weights*);
 Weights *weightsinitdouble(Weights*, double);
 Weights *weightsinitdoubles(Weights*, double*);

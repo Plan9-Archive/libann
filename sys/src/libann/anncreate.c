@@ -4,7 +4,7 @@
 #define RAND_MAX 0xFFFF
 
 Neuron*
-neuroninit(Neuron *in, double (*activation)(double input), double (*gradient)(double input), double steepness)
+neuroninit(Neuron *in, double (*activation)(Neuron*), double (*gradient)(Neuron*), double steepness)
 {
 	in->activation = activation;
 	in->gradient = gradient;
@@ -15,7 +15,7 @@ neuroninit(Neuron *in, double (*activation)(double input), double (*gradient)(do
 }
 
 Neuron*
-neuroncreate(double (*activation)(double input), double (*gradient)(double input), double steepness)
+neuroncreate(double (*activation)(Neuron*), double (*gradient)(Neuron*), double steepness)
 {
 	Neuron *ret = calloc(1, sizeof(Neuron));
 	neuroninit(ret, activation, gradient, steepness);
@@ -23,7 +23,7 @@ neuroncreate(double (*activation)(double input), double (*gradient)(double input
 }
 
 Layer*
-layercreate(int num_neurons, double(*activation)(double), double(*gradient)(double))
+layercreate(int num_neurons, double(*activation)(Neuron*), double(*gradient)(Neuron*))
 {
 	Layer *ret = calloc(1, sizeof(Layer));
 	int i;

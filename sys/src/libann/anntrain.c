@@ -27,7 +27,7 @@ anntrain(Ann *ann, double *inputs, double *outputs)
 
 		for (o = 0; o < ann->layers[w+1]->n; o++) {
 			O = ann->layers[w+1]->neurons[o];
-			acc = O->gradient(O->sum) * O->steepness;
+			acc = O->gradient(O) * O->steepness;
 			sum = 1.0;
 			if (D2 != D) {
 				W = ann->weights[w + 1];
