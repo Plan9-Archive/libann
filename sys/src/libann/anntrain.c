@@ -2,10 +2,11 @@
 #include <libc.h>
 #include <ann.h>
 
-void
+double
 anntrain(Ann *ann, double *inputs, double *outputs)
 {
 	double *error = annrun(ann, inputs);
+	double ret = 0.0;
 	int noutputs = ann->layers[ann->n-1]->n;
 	double acc, sum;
 	int o, i, w, n;
@@ -16,6 +17,7 @@ anntrain(Ann *ann, double *inputs, double *outputs)
 		// error = outputs[o] - result
 		error[o] -= outputs[o];
 		error[o] = -error[o];
+		ret += pow(error[o], 2.0) * 0.5;
 	}
 	D = ann->deltas[ann->n-2];
 	weightsinitdoubles(D, error);
@@ -61,4 +63,5 @@ anntrain(Ann *ann, double *inputs, double *outputs)
 	}
 
 	free(error);
+	return ret;
 }
