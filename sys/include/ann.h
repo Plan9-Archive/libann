@@ -40,6 +40,7 @@ Layer *layercreate(int, double(*)(Neuron*), double(*)(Neuron*));
 Neuron *neuroninit(Neuron*, double (*)(Neuron*), double (*)(Neuron*), double);
 Neuron *neuroncreate(double (*)(Neuron*), double (*)(Neuron*), double);
 Weights *weightsinitrand(Weights*);
+Weights *weightsinitrandscale(Weights*, double);
 Weights *weightsinitdouble(Weights*, double);
 Weights *weightsinitdoubles(Weights*, double*);
 Weights *weightscreate(int, int, int);

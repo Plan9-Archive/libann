@@ -1,7 +1,6 @@
 #include <u.h>
 #include <libc.h>
 #include <ann.h>
-#define RAND_MAX 0xFFFF
 
 Neuron*
 neuroninit(Neuron *in, double (*activation)(Neuron*), double (*gradient)(Neuron*), double steepness)
@@ -34,31 +33,6 @@ layercreate(int num_neurons, double(*activation)(Neuron*), double(*gradient)(Neu
 		ret->neurons[i] = neuroncreate(activation, gradient, 1.0);
 	}
 	return ret;
-}
-
-Weights*
-weightsinitrand(Weights *in)
-{
-	int i, o;
-
-	srand(time(0));
-	for (i = 0; i <= in->inputs; i++)
-		for (o = 0; o < in->outputs; o++)
-			in->values[i][o] = (((double)rand()/RAND_MAX) - 0.5) * 4.0;
-
-	return in;
-}
-
-Weights*
-weightsinitdouble(Weights *in, double init)
-{
-	int i, o;
-
-	for (i = 0; i <= in->inputs; i++)
-		for (o = 0; o < in->outputs; o++)
-			in->values[i][o] = init;
-
-	return in;
 }
 
 Weights*
