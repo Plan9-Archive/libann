@@ -5,26 +5,24 @@
 void
 main()
 {
-	int i, j, counter = 0;;
+	int i, counter = 0;;
 	Ann *test = anncreate(3, 2, 16, 1);
-	test->rate = 4.0;
 	double inputs[4][2] = { { 1.0, 1.0 }, {1.0, 0.0}, {0.0, 1.0}, {0.0, 0.0}};
 	double outputs[4] = { 0.0, 1.0, 1.0, 0.0 };
 	double *results;
 	double error = 1000;
-	while (error > 0.001) {
-		for (i = 0; i < 4; i++) {
-			anntrain(test, inputs[i], &outputs[i]);
-		}
+
+	test->rate = 4.0;
+
+	while (error >= 0.001) {
+		error = 0;
+		for (i = 0; i < 4; i++)
+			error += anntrain(test, inputs[i], &outputs[i]);	
 
 		counter++;
-		error = 0;
-		for (j = 0; j < 4; j++) {
-			results = annrun(test, inputs[j]);
-			error += pow(results[0] - outputs[j], 2.0);
-			free(results);
-		}
-		print("error: %f\n", error);
+		if (counter % 100 == 1)
+			print("error: %f\n", error);
 	}
+
 	print("error: %f, done after %d epochs\n", error, counter);
 }
