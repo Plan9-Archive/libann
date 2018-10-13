@@ -7,7 +7,7 @@ OFILES=\
 	annrun.$O\
 	anntrain.$O\
 	anncreate.$O\
-	weightsinitdoubles.$O\
+	weightsinit.$O\
 
 HFILES=\
 	/sys/include/ann.h\
