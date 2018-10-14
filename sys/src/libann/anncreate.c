@@ -71,12 +71,14 @@ anncreate(int num_layers, ...)
 		arg = va_arg(args, int);
 		if (arg < 0 || arg > 1000000)
 			arg = 0;
-		ret->layers[i] = layercreate(arg, activation_sigmoid, gradient_sigmoid);
+		ret->layers[i] = layercreate(arg, activation_leaky_relu, gradient_leaky_relu);
 		if (i > 0) {
 			ret->weights[i-1] = weightscreate(ret->layers[i-1]->n, ret->layers[i]->n, 1);
 			ret->deltas[i-1] = weightscreate(ret->layers[i-1]->n, ret->layers[i]->n, 0);
 		}
-	}	va_end(args);
+	}
+
+	va_end(args);
 
 	return ret;
 }

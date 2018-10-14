@@ -35,6 +35,11 @@ struct Weights {
 
 double activation_sigmoid(Neuron*);
 double gradient_sigmoid(Neuron*);
+double activation_tanh(Neuron*);
+double gradient_tanh(Neuron*);
+double activation_leaky_relu(Neuron*);
+double gradient_leaky_relu(Neuron*);
+
 Ann *anncreate(int, ...);
 Layer *layercreate(int, double(*)(Neuron*), double(*)(Neuron*));
 Neuron *neuroninit(Neuron*, double (*)(Neuron*), double (*)(Neuron*), double);
