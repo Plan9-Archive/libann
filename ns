@@ -1,0 +1,2 @@
+bind -b sys/src /sys/src
+bind -b sys/include /sys/include
