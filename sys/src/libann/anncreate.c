@@ -47,8 +47,6 @@ weightscreate(int inputs, int outputs, int initialize)
 		ret->values[i] = calloc(outputs, sizeof(double));
 	if (initialize)
 		weightsinitrand(ret);
-	else
-		weightsinitdouble(ret, 1.0);
 	return ret;
 }
 

@@ -44,6 +44,6 @@ weightsinitrandscale(Weights *in, double scale)
 Weights*
 weightsinitrand(Weights *in)
 {
-	weightsinitrandscale(in, 4.0);
+	weightsinitrandscale(in, 0.2);
 	return in;
 }

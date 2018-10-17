@@ -8,6 +8,7 @@ OFILES=\
 	anntrain.$O\
 	anncreate.$O\
 	weightsinit.$O\
+	anntrain_adam.$O\
 
 HFILES=\
 	/sys/include/ann.h\
