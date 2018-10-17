@@ -1,8 +1,7 @@
 #include <u.h>
 #include <libc.h>
 #include <ann.h>
-#define RAND_MAX 0xFFFF
-
+#define RAND_MAX 0xFFFFFFFF
 
 Weights*
 weightsinitdoubles(Weights *in, double *init)
@@ -36,7 +35,7 @@ weightsinitrandscale(Weights *in, double scale)
 	srand(time(0));
 	for (i = 0; i <= in->inputs; i++)
 		for (o = 0; o < in->outputs; o++)
-			in->values[i][o] = (((double)rand()/RAND_MAX) - 0.5) * scale;
+			in->values[i][o] = (((double)truerand()/RAND_MAX) - 0.5) * scale;
 
 	return in;
 }
