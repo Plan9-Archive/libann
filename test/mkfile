@@ -1,0 +1,13 @@
+</$objtype/mkfile
+
+$home/bin/$objtype/annxortest: annxortest.$O
+	$LD -o $home/bin/$objtype/annxortest annxortest.$O
+
+annxortest.$O: annxortest.c
+	$CC annxortest.c
+
+clean:
+	rm -f annxortest.[568qv]
+
+nuke: clean
+	rm $home/bin/$objtype/annxortest

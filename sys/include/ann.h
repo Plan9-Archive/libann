@@ -12,6 +12,8 @@ struct Ann {
 	Layer **layers;
 	Weights **weights;
 	Weights **deltas;
+	void *user;
+	void *internal;
 };
 
 struct Layer {
@@ -25,6 +27,8 @@ struct Neuron {
 	double steepness;
 	double value;
 	double sum;
+	void *user;
+	void *internal;
 };
 
 struct Weights {
@@ -51,3 +55,17 @@ Weights *weightsinitdoubles(Weights*, double*);
 Weights *weightscreate(int, int, int);
 double *annrun(Ann*, double*);
 double anntrain(Ann*, double*, double*);
+
+typedef struct Adam Adam;
+
+struct Adam {
+	double rate;
+	double beta1;
+	double beta2;
+	Weights **first;
+	Weights **second;
+	double epsilon;
+	int timestep;
+};
+
+double anntrain_adam(Ann*, double*, double*);
