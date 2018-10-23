@@ -9,8 +9,8 @@ adaminit(Ann *ann)
 	Adam *I = calloc(1, sizeof(Adam));
 
 	I->rate = 0.001;
-	I->beta1 = 0.75;
-	I->beta2 = 0.9;
+	I->beta1 = 0.9;
+	I->beta2 = 0.999;
 	I->epsilon = 10e-8;
 	I->timestep = 0;
 	I->first = calloc(ann->n-1, sizeof(Weights*));
@@ -74,11 +74,12 @@ anntrain_adam(Ann *ann, double *inputs, double *outputs)
 					sum += D2->values[o][n] * W->values[o][n];
 			}
 			for (i = 0; i <= ann->layers[w]->n; i++) {
+				I = ann->layers[w]->neurons[i];
 			 	D->values[i][o] *= acc * sum;
 				M->values[i][o] *= annI->beta1;
-				M->values[i][o] += (1.0 - annI->beta1) * D->values[i][o];
+				M->values[i][o] += (1.0 - annI->beta1) * D->values[i][o] * I->value;
 				V->values[i][o] *= annI->beta2;
-				V->values[i][o] += (1.0 - annI->beta2) * D->values[i][o] * D->values[i][o];
+				V->values[i][o] += (1.0 - annI->beta2) * D->values[i][o] * D->values[i][o] * I->value * I->value;
 			}
 		}
 
@@ -92,11 +93,10 @@ anntrain_adam(Ann *ann, double *inputs, double *outputs)
 		V = annI->second[w];
 
 		for (i = 0; i <= W->inputs; i++) {
-			I = ann->layers[w]->neurons[i];
 			for (o = 0; o < W->outputs; o++) {
-				m = M->values[i][o] / (annI->timestep < 1000? 1.0 - pow(annI->beta1, annI->timestep): 1.0);
-				v = V->values[i][o] / (annI->timestep < 1000? 1.0 - pow(annI->beta2, annI->timestep): 1.0);
-				W->values[i][o] += (m / (sqrt(v) + annI->epsilon)) * annI->rate * I->value;
+				m = M->values[i][o] / (annI->timestep < 100? 1.0 - pow(annI->beta1, annI->timestep): 1.0);
+				v = V->values[i][o] / (annI->timestep < 10000? 1.0 - pow(annI->beta2, annI->timestep): 1.0);
+				W->values[i][o] += (m / (sqrt(v) + annI->epsilon)) * annI->rate;
 			}
 		}
 	}
