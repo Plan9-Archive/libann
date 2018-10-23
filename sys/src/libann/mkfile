@@ -9,6 +9,7 @@ OFILES=\
 	anncreate.$O\
 	weightsinit.$O\
 	anntrain_adam.$O\
+	anntrain_adamax.$O\
 
 HFILES=\
 	/sys/include/ann.h\

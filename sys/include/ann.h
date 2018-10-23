@@ -69,3 +69,4 @@ struct Adam {
 };
 
 double anntrain_adam(Ann*, double*, double*);
+double anntrain_adamax(Ann*, double*, double*);
